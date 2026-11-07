@@ -112,7 +112,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 }
 .sidebar::after{content:"";position:absolute;width:230px;height:230px;left:-150px;top:110px;border-radius:50%;background:#8fbd7030;filter:blur(90px);pointer-events:none}
 .brand{position:relative;z-index:1;padding-bottom:38px}
-.brand-icon{background:linear-gradient(145deg,#d1efad,#91bc72);box-shadow:0 5px 22px #a8d7832e;color:#142019}
+.brand-icon{background:none;box-shadow:0 5px 22px #a8d7832e;object-fit:cover;flex:none}
 .season-switch,.backup-card,.icon-button,.square-button{transition:background .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease}
 .season-switch:hover,.backup-card:hover{border-color:#3b4e3d;background:#141d16}
 .nav-section-title{color:#758477}

@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080a09">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icon.png" type="image/png">
   <title>Safra — Organizador de colheita</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body><svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><symbol id="calendar-days" viewBox="0 0 24 24"><path d="M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></symbol><symbol id="chart-no-axes-column-increasing" viewBox="0 0 24 24"><path d="M5 21v-6m7 6V9m7 12V3"/></symbol><symbol id="users-round" viewBox="0 0 24 24"><path d="M18 21a8 8 0 0 0-16 0m16 0h2v-1a6 6 0 0 0-9-5.2M10 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Zm12 4a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></symbol><symbol id="cloud-download" viewBox="0 0 24 24"><path d="M12 13v8m-4-4 4 4 4-4"/><path d="M20 16.2a5 5 0 0 0-1.5-9.77A7 7 0 0 0 5 8a4 4 0 0 0 .4 8H8"/></symbol><symbol id="circle-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3m.1 4h.01"/></symbol><symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14m-7-7h14"/></symbol><symbol id="chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol><symbol id="chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol><symbol id="sprout" viewBox="0 0 24 24"><path d="M7 20h10m-5 0v-8m0 0C12 6 6 4 3 4c0 6 3 9 9 8Zm0-3c0-4 4-6 9-6 0 5-2 8-9 9"/></symbol><symbol id="arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol><symbol id="arrow-up-from-line" viewBox="0 0 24 24"><path d="M12 16V4m-4 4 4-4 4 4M4 20h16"/></symbol><symbol id="pencil" viewBox="0 0 24 24"><path d="m16 4 4 4M4 20l4-.8L19.5 7.7a2.12 2.12 0 0 0-3-3L5 16.2 4 20Z"/></symbol><symbol id="x" viewBox="0 0 24 24"><path d="m18 6-12 12M6 6l12 12"/></symbol><symbol id="ellipsis" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol><symbol id="tractor" viewBox="0 0 24 24"><path d="M3 7h8l2 5h5l3 3v4h-2m-8 0H9m-6 0V9m2 10a2 2 0 1 0 4 0m8 0a2 2 0 1 0 4 0M11 7V4h4l2 8"/><path d="M5 11h5"/></symbol><symbol id="trash-2" viewBox="0 0 24 24"><path d="M3 6h18m-2 0-.9 14H5.9L5 6m4 0V4h6v2m-5 4v6m4-6v6"/></symbol></defs></svg>
   <div class="app-shell">
     <aside class="sidebar">
-      <a class="brand" href="#" aria-label="Safra início"><img class="brand-icon" src="icon.svg" alt=""><span>Safra<span class="brand-dot">.</span><small>organizador de colheita</small></span></a>
+      <a class="brand" href="#" aria-label="Safra início"><img class="brand-icon" src="icon.png" alt=""><span>Safra<span class="brand-dot">.</span><small>organizador de colheita</small></span></a>
       <div class="season-label">SAFRA ATIVA</div>
       <button class="season-switch"><span><i></i> 2026 / 2027</span><span>⌄</span></button>
       <nav class="main-nav" aria-label="Navegação principal">
@@ -31,7 +31,7 @@
     </aside>
 
     <main class="main-content">
-      <header class="topbar"><div class="mobile-brand"><img class="brand-icon" src="icon.svg" alt=""> Safra<span class="brand-dot">.</span></div><div class="breadcrumb">Safra <span>/</span> <strong id="crumb-view">Calendário</strong></div><div class="top-actions"><button class="icon-button" id="backup-top" title="Backup">↥</button><button class="icon-button" title="Ajuda">?</button><div class="avatar small-avatar">E</div></div></header>
+      <header class="topbar"><div class="mobile-brand"><img class="brand-icon" src="icon.png" alt=""> Safra<span class="brand-dot">.</span></div><div class="breadcrumb">Safra <span>/</span> <strong id="crumb-view">Calendário</strong></div><div class="top-actions"><button class="icon-button" id="backup-top" title="Backup">↥</button><button class="icon-button" title="Ajuda">?</button><div class="avatar small-avatar">E</div></div></header>
       <section class="page-heading"><div><div class="eyebrow"><span class="live-dot"></span> ACOMPANHAMENTO DA SAFRA</div><h1 id="page-title">Seu calendário</h1><p id="page-subtitle">Organize os dias de trabalho e acompanhe cada estufada.</p></div><button class="primary-button" id="add-record"><span>＋</span> Novo registro</button></section>
 
       <div class="mode-switch hidden" role="tablist" aria-label="Modo de colheita"><button class="mode-tab active" data-mode="others"><span class="mode-icon">↗</span><span><strong>Para outras pessoas</strong><small>Serviços, pagamentos e trocas</small></span></button><button class="mode-tab" data-mode="ours"><span class="mode-icon ours-icon">♧</span><span><strong>Nossa colheita</strong><small>Minhas estufadas e as do pai</small></span></button></div>

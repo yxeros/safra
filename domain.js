@@ -34,6 +34,7 @@
     return false;
   };
   const sumDays = records => round((records || []).reduce((sum, record) => sum + DAY_UNITS(record), 0));
+  const personalWorkDays = records => sumDays((records || []).filter(userWorked));
 
   function participantDeals(record) {
     const existing = new Map((record?.workerDeals || []).map(deal => [canonicalPersonKey(deal.name), deal]));
@@ -170,7 +171,7 @@
 
   const api = {
     DAY_UNITS, familyRecord, thirdPartyRecord, workerNames, hasWorker, userWorked,
-    sumDays, round, formatNumber, participantDeals, seasonStartYear, recordSeasonYear,
+    sumDays, personalWorkDays, round, formatNumber, participantDeals, seasonStartYear, recordSeasonYear,
     inSeason, familyStufasInSeason, visibleInMode, externalStufaTotals,
     personalDaysByEmployer, personDays, exchangeLedger
   };

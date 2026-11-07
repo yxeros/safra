@@ -323,3 +323,85 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
   .day-cell{height:62px}
   .event-chip{font-size:6px;padding:2px}
 }
+
+.mobile-menu-toggle,.drawer-close,.sidebar-backdrop{display:none}
+@media(max-width:700px){
+  .sidebar{
+    display:flex;
+    position:fixed;
+    z-index:7;
+    top:0;
+    left:0;
+    bottom:0;
+    width:min(310px,calc(100vw - 54px));
+    height:100vh;
+    height:100dvh;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    padding-top:28px;
+    transform:translateX(-103%);
+    visibility:hidden;
+    transition:transform .28s cubic-bezier(.2,.75,.25,1),visibility 0s linear .28s;
+    box-shadow:22px 0 55px #0008;
+  }
+  .sidebar.is-open{transform:translateX(0);visibility:visible;transition:transform .28s cubic-bezier(.2,.75,.25,1),visibility 0s}
+  .sidebar .brand{padding-right:50px}
+  .drawer-close{
+    position:absolute;
+    z-index:2;
+    top:20px;
+    right:13px;
+    display:grid;
+    place-items:center;
+    width:36px;
+    height:36px;
+    border:1px solid #2d3a30;
+    border-radius:9px;
+    background:#111812;
+    color:#b6c3b8;
+    font-size:22px;
+    line-height:1;
+  }
+  .drawer-close:hover{background:#1d291f;color:#e3f0e1;border-color:#52654d}
+  .mobile-menu-toggle{
+    display:grid;
+    flex:none;
+    place-items:center;
+    width:38px;
+    height:38px;
+    border-color:#2b382d;
+    background:#101611;
+    color:#c3d2c4;
+  }
+  .mobile-menu-toggle:hover{background:#1b271d;border-color:#53694b;color:#d7edc3}
+  .menu-glyph{width:17px;height:14px;display:grid;align-content:space-between}
+  .menu-glyph i{display:block;width:100%;height:1.5px;border-radius:2px;background:currentColor;transition:transform .22s ease,opacity .16s ease}
+  .mobile-menu-toggle[aria-expanded="true"] .menu-glyph i:first-child{transform:translateY(6.25px) rotate(45deg)}
+  .mobile-menu-toggle[aria-expanded="true"] .menu-glyph i:nth-child(2){opacity:0;transform:scaleX(.2)}
+  .mobile-menu-toggle[aria-expanded="true"] .menu-glyph i:last-child{transform:translateY(-6.25px) rotate(-45deg)}
+  .topbar{justify-content:flex-start;gap:10px}
+  .mobile-brand{flex:1;min-width:0}
+  .top-actions{margin-left:auto}
+  .mobile-nav{display:none!important}
+  .main-content{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+  .sidebar-backdrop{
+    display:block;
+    position:fixed;
+    z-index:6;
+    inset:0;
+    width:100%;
+    height:100%;
+    padding:0;
+    border:0;
+    background:#040705bd;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+    transition:opacity .22s ease,visibility 0s linear .22s;
+  }
+  .sidebar-backdrop.is-visible{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s ease,visibility 0s}
+  body.menu-open{overflow:hidden}
+}

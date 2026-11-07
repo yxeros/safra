@@ -241,7 +241,7 @@
   function openRecord(date = selectedDate, record = null) {
     const dialog = $('#record-dialog');
     const form = $('#record-form');
-    if(record){mode=record.mode;$$('.mode-tab').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$$('.nav-item[data-mode],.mobile-nav button[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));const label=mode==='others'?'Para outras pessoas':mode==='ours'?'Nossa colheita':'Trator do Pablo';$('#crumb-view').textContent=label;$('#page-title').textContent=label;}
+    if(record){mode=record.mode;$$('.mode-tab').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$$('.nav-item[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));const label=mode==='others'?'Para outras pessoas':mode==='ours'?'Nossa colheita':'Trator do Pablo';$('#crumb-view').textContent=label;$('#page-title').textContent=label;}
     editingId = record?.id || null;participantDrafts=new Map();
     form.reset(); form.elements.date.value = date; form.elements.duration.value = 'full';form.elements.exchangeDays.value=1;form.elements.exchangeDays.dataset.defaulted='true';
     $('#dialog-title').textContent = record ? 'Editar registro' : mode==='tractor' ? 'Registrar empréstimo do trator' : mode === 'ours' ? 'Registrar dia de colheita' : 'Registrar trabalho';
@@ -352,7 +352,7 @@
     }
   }
 
-  function changeMode(next) { mode=next;activeView='calendar';$$('.mode-tab').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$$('.nav-item[data-mode],.mobile-nav button[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$$('.nav-item[data-view],.mobile-nav button[data-view]').forEach(b=>b.classList.remove('active'));$('#calendar-view').classList.remove('hidden');$('.below-calendar').classList.remove('hidden');$('#summary-cards').classList.remove('hidden');$('#stats-view').classList.add('hidden');$('#people-view').classList.add('hidden');const heading=mode==='others'?'Para outras pessoas':mode==='ours'?'Nossa colheita':'Trator do Pablo';$('#crumb-view').textContent=heading;$('#page-title').textContent=heading;$('#page-subtitle').textContent=mode==='others'?'Dias, pessoas, pagamentos e trocas de serviço.':mode==='ours'?'Acompanhe estufadas, equipes, pagamentos e trocas.':'Anote os dias em que emprestamos o trator para o Pablo.';render(); }
+  function changeMode(next) { mode=next;activeView='calendar';$$('.mode-tab').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$$('.nav-item[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));$$('.nav-item[data-view]').forEach(b=>b.classList.remove('active'));$('#calendar-view').classList.remove('hidden');$('.below-calendar').classList.remove('hidden');$('#summary-cards').classList.remove('hidden');$('#stats-view').classList.add('hidden');$('#people-view').classList.add('hidden');const heading=mode==='others'?'Para outras pessoas':mode==='ours'?'Nossa colheita':'Trator do Pablo';$('#crumb-view').textContent=heading;$('#page-title').textContent=heading;$('#page-subtitle').textContent=mode==='others'?'Dias, pessoas, pagamentos e trocas de serviço.':mode==='ours'?'Acompanhe estufadas, equipes, pagamentos e trocas.':'Anote os dias em que emprestamos o trator para o Pablo.';render(); }
   function changeView(next) {
     activeView = next;
     const calendar = next === 'calendar';
@@ -361,15 +361,26 @@
     const label = next === 'calendar' ? (mode==='others'?'Para outras pessoas':mode==='ours'?'Nossa colheita':'Trator do Pablo') : next === 'stats' ? 'Estatísticas' : 'Pessoas';
     $('#crumb-view').textContent = label; $('#page-title').textContent = label;
     $('#page-subtitle').textContent = next === 'calendar' ? (mode==='tractor'?'Anote os dias em que emprestamos o trator para o Pablo.':'Organize os dias de trabalho e acompanhe as estufadas.') : next === 'stats' ? 'Acompanhe os números importantes da safra.' : 'Gerencie patrões, camaradas e compradores.';
-    $$('.nav-item,.mobile-nav button').forEach(b => b.classList.toggle('active', b.dataset.view === next));
+    $$('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === next));
     renderAltView();
+  }
+
+  function setMobileMenuOpen(open, returnFocus = false) {
+    const sidebar = $('#sidebar');
+    const toggle = $('#mobile-menu-toggle');
+    sidebar.classList.toggle('is-open', open);
+    $('#sidebar-backdrop').classList.toggle('is-visible', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    document.body.classList.toggle('menu-open', open);
+    if (open) (sidebar.querySelector('.nav-item.active') || sidebar.querySelector('.nav-item'))?.focus({ preventScroll: true });
+    else if (returnFocus) toggle.focus({ preventScroll: true });
   }
 
   function hydrateIcons() {
     $('[data-view="calendar"] .nav-item span, .nav-item[data-view="calendar"] span')?.replaceChildren();
     const targets = [
       ['.nav-item[data-mode="others"] span','arrow-up-right'], ['.nav-item[data-mode="ours"] span','sprout'], ['.nav-item[data-mode="tractor"] span','tractor'], ['.nav-item[data-view="stats"] span','chart-no-axes-column-increasing'], ['.nav-item[data-view="people"] span','users-round'],
-      ['.mobile-nav button[data-mode="others"] span','arrow-up-right'], ['.mobile-nav button[data-mode="ours"] span','sprout'], ['.mobile-nav button[data-mode="tractor"] span','tractor'], ['.mobile-nav button[data-view="stats"] span','chart-no-axes-column-increasing'], ['.mobile-nav button[data-view="people"] span','users-round'],
       ['#backup-top','arrow-up-from-line'], ['#backup-open','cloud-download'], ['.top-actions .icon-button[title="Ajuda"]','circle-help'],
       ['.mode-tab[data-mode="others"] .mode-icon','arrow-up-right'], ['.mode-tab[data-mode="ours"] .mode-icon','sprout'],
       ['#prev-month','chevron-left'], ['#next-month','chevron-right'], ['.page-heading .primary-button span','plus']
@@ -384,8 +395,15 @@
   $('#prev-month').onclick = () => { currentMonth.setMonth(currentMonth.getMonth() - 1); renderCalendar(); };
   $('#next-month').onclick = () => { currentMonth.setMonth(currentMonth.getMonth() + 1); renderCalendar(); };
   $('#today-button').onclick = () => { currentMonth = new Date(new Date().getFullYear(),new Date().getMonth(),1); selectedDate = todayISO(); render(); };
-  $$('.mode-tab,.nav-item[data-mode],.mobile-nav button[data-mode]').forEach(b => b.addEventListener('click', () => changeMode(b.dataset.mode)));
-  $$('.nav-item[data-view],.mobile-nav button[data-view]').forEach(b => b.addEventListener('click', () => changeView(b.dataset.view)));
+  $('#mobile-menu-toggle').addEventListener('click', () => setMobileMenuOpen(!$('#sidebar').classList.contains('is-open')));
+  $('#sidebar-close').addEventListener('click', () => setMobileMenuOpen(false, true));
+  $('#sidebar-backdrop').addEventListener('click', () => setMobileMenuOpen(false, true));
+  $('#sidebar .brand').addEventListener('click', () => setMobileMenuOpen(false));
+  $$('.sidebar .nav-item').forEach(b => b.addEventListener('click', () => setMobileMenuOpen(false)));
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && $('#sidebar').classList.contains('is-open')) setMobileMenuOpen(false, true); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 700 && $('#sidebar').classList.contains('is-open')) setMobileMenuOpen(false); });
+  $$('.mode-tab,.nav-item[data-mode]').forEach(b => b.addEventListener('click', () => changeMode(b.dataset.mode)));
+  $$('.nav-item[data-view]').forEach(b => b.addEventListener('click', () => changeView(b.dataset.view)));
   $('#add-record').onclick = () => openRecord(selectedDate);
   $('#add-day-record').onclick = () => openRecord(selectedDate);
   $('#record-form').elements.settlement.addEventListener('change', e => {

@@ -1,4 +1,4 @@
-const CACHE = 'safra-app-v23';
+const CACHE = 'safra-app-v24';
 const ASSETS = ['./', './index.html', './styles.css', './domain.js', './app.js', './manifest.webmanifest', './icon.png', './icons.svg'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));
